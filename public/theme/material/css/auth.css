@@ -24,7 +24,6 @@
 .auth-main {
 	background: white;
 	border-radius: 15px;
-	box-shadow: 0 0 7px 1px #c5c5c5;
 }
 
 .auth-main .form-group-label,.auth-top,.auth-bottom {
@@ -107,7 +106,6 @@ a.boardtop-right {
 	background: #54aff9;
 	padding: 3px 1.5em 2px 1.5em;
 	border-radius: 10px 0 0 0px;
-	box-shadow: 0 0 5px 0px #969696;
 	position: relative;
 	text-align: center;
 }
@@ -121,7 +119,6 @@ a.boardtop-left {
 	background: #54aff9;
 	padding: 3px 1.5em 2px 1.5em;
 	border-radius: 0 10px 0 0;
-	box-shadow: 0 0 5px 0px #969696;
 	position: relative;
 }
 a.boardtop-left:hover {
@@ -175,7 +172,6 @@ a.boardtop-left:hover {
 	max-width: 100px;
 	border-radius: 50%;
 	margin: 1em 0 1em 0;
-	box-shadow: 0 0 5px 0 #afafaf;
 	user-select: none;
 }
 
@@ -358,4 +354,29 @@ a.boardtop-left:hover {
 	.auth-help-reg {
 		left: 30px;
 	}
+}
+
+@media (prefers-color-scheme: dark) {
+  .auth-main {
+    background: #202225;
+  }
+  .btn-auth button {
+    background: #4b789d;
+  }
+  a {
+    color: #3874a5;
+  }
+  a.boardtop-left,
+  a.boardtop-right {
+    background: #4b789d;
+  }
+  .auth-top {
+    background: #202225;
+  }
+  .auth-bottom {
+    background: #637c89;
+  }
+  .auth-bottom p {
+    color: #dfdfdf;
+  }
 }

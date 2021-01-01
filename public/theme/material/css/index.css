@@ -206,7 +206,6 @@ button.btn-user:hover,
 .uim-dropdown-btn:hover,
 button.btn-user.index-btn-active {
     border: 1px solid white;
-    box-shadow: 0 0 5px 1px gray;
 }
 
 .footer {
@@ -507,7 +506,6 @@ select {
 .card:hover,
 .list-shop:hover {
     border: 1px solid white;
-    box-shadow: 0 0 5px 1px gray;
 }
 
 .card-title {
@@ -960,7 +958,6 @@ button[name=reset] {
     background: white;
     width: 200px;
     min-height: 36px;
-    box-shadow: 0px 0px 5px 1px gray;
 }
 
 .uim-messager span {
@@ -1004,7 +1001,6 @@ input[type=checkbox].uim-checkbox {
 
 .uimchecked {
     background: #D1335B;
-    box-shadow: 0 0 5px 1px gray;
 }
 
 /* dropdown */
@@ -1029,7 +1025,6 @@ input[type=checkbox].uim-checkbox {
     padding: 0;
     text-align: center;
     border: 1px solid #1997c6;
-    box-shadow: 0 0 5px 1px gray;
 }
 
 .uim-dropdown-menu li {
@@ -1101,7 +1096,6 @@ input[type=checkbox].uim-checkbox {
     border-radius: 7px;
     color: #434857;
     margin-bottom: auto;
-    box-shadow: 0 0 5px 2px gray;
     position: relative;
 }
 
@@ -1215,7 +1209,6 @@ button.uim-modal-confirm {
 .uim-tooltip {
     position: absolute;
     z-index: 2;
-    box-shadow: 0 0 5px 1px gray;
     border-radius: 4px;
     background: white;
     color: #434857;
@@ -1265,14 +1258,12 @@ button.uim-modal-confirm {
 
 .uim-anchor li:hover {
     border-color: #7cb7f7;
-    box-shadow: 0 0 5px 1px #a1e2e2;
     border-top-color: #7cb7f7;
 }
 
 .uim-anchor li.uim-anchor-active {
     background-color: #1997c6;
     border-color: #7cb7f7;
-    box-shadow: 0 0 5px 0 #a1e2e2;
     border-top-color: #7cb7f7;
 }
 
@@ -1326,17 +1317,14 @@ button.uim-modal-confirm {
 
 .uim-progressbar .uim-progressbar-blue {
     background-color: #2d8cf0;
-    box-shadow: 0 0 7px 0 #13c2c2;
 }
 
 .uim-progressbar .uim-progressbar-gold {
     background-color: #e8a114;
-    box-shadow: 0 0 7px 0 #d4c00c;
 }
 
 .uim-progressbar .uim-progressbar-red {
     background-color: #D1335B;
-    box-shadow: 0 0 7px 0 rgb(177, 15, 56);
 }
 
 .uim-progressbar-progress.uim-progressbar-fold {
@@ -1344,7 +1332,6 @@ button.uim-modal-confirm {
 }
 
 .uim-progressbar-progress.uim-progressbar-fold.uim-progressbar-red {
-    box-shadow: 0 0 7px 1px indianred;
 }
 
 .uim-progressbar-sub .uim-progressbar-inner,
