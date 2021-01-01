@@ -9,6 +9,58 @@
     <div class="container">
         <section class="content-inner margin-top-no">
             <div class="col-xx-12 col-sm-6">
+
+              {if $config['enable_change_email'] == true}
+                <div class="card margin-bottom-no">
+                  <div class="card-main">
+                    <div class="card-inner">
+                      <div class="card-inner">
+                        <div class="cardbtn-edit">
+                          <div class="card-heading">账户邮箱修改</div>
+                          <button class="btn btn-flat" id="email-update"><span class="icon">check</span>&nbsp;
+                          </button>
+                        </div>
+                        <div class="form-group form-group-label">
+                          <label class="floating-label" for="newemail">新邮箱</label>
+                          <input class="form-control maxwidth-edit" id="newemail" type="text">
+                        </div>
+                        {if $config['enable_email_verify'] == true}
+                          <div class="form-group form-group-label">
+                            <label class="floating-label" for="email_code">邮箱验证码</label>
+                            <input class="form-control maxwidth-auth" id="email_code" type="text"
+                              onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" autocomplete="one-time-code">
+                          </div>
+                          <div class="form-group form-group-label">
+                            <button id="email_verify" class="btn-reg btn btn-block btn-brand-accent waves-attach waves-light">
+                              获取验证码
+                            </button>
+                          </div>
+                        {/if}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {/if}
+              <div class="card margin-bottom-no">
+                <div class="card-main">
+                  <div class="card-inner">
+                    <div class="card-inner">
+                      <div class="cardbtn-edit">
+                        <div class="card-heading">用戶名修改</div>
+                        <button class="btn btn-flat" id="username-update"><span class="icon">check</span>&nbsp;
+                        </button>
+                      </div>
+                      <div class="form-group form-group-label">
+                        <label class="floating-label" for="newusername">新用戶名</label>
+                        <input class="form-control maxwidth-edit" id="newusername" type="text">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
                 <div class="card margin-bottom-no">
                     <div class="card-main">
                         <div class="card-inner">
@@ -29,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card margin-bottom-no">
+                {* <div class="card margin-bottom-no">
                     <div class="card-main">
                         <div class="card-inner">
                             <div class="card-inner">
@@ -117,7 +169,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> *}
 				<div class="card margin-bottom-no">
 					<div class="card-main">
 						<div class="card-inner">
@@ -132,58 +184,26 @@
 							</div>
 						</div>
 					</div>
-                </div>
-            </div>
+        </div>
+
+<div class="card margin-bottom-no">
+  <div class="card-main">
+    <div class="card-inner">
+      <div class="card-inner">
+        <div class="cardbtn-edit">
+          <div class="card-heading">IP 解封</div>
+          <button class="btn btn-flat" id="unblock"><span class="icon">not_interested</span>&nbsp;
+          </button>
+        </div>
+        <p>当前状态：<code id="ajax-block">{$Block}</code></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      </div>
             <div class="col-xx-12 col-sm-6">
-                {if $config['enable_change_email'] == true}
-                    <div class="card margin-bottom-no">
-                        <div class="card-main">
-                            <div class="card-inner">
-                                <div class="card-inner">
-                                    <div class="cardbtn-edit">
-                                        <div class="card-heading">账户邮箱修改</div>
-                                        <button class="btn btn-flat" id="email-update"><span class="icon">check</span>&nbsp;
-                                        </button>
-                                    </div>
-                                    <div class="form-group form-group-label">
-                                        <label class="floating-label" for="newemail">新邮箱</label>
-                                        <input class="form-control maxwidth-edit" id="newemail" type="text">
-                                    </div>
-                                    {if $config['enable_email_verify'] == true}
-                                        <div class="form-group form-group-label">
-                                            <label class="floating-label" for="email_code">邮箱验证码</label>
-                                            <input class="form-control maxwidth-auth" id="email_code" type="text"
-                                                onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" autocomplete="one-time-code">
-                                        </div>
-                                        <div class="form-group form-group-label">
-                                            <button id="email_verify"
-                                                class="btn-reg btn btn-block btn-brand-accent waves-attach waves-light">
-                                                获取验证码
-                                            </button>
-                                        </div>
-                                    {/if}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {/if}
-                <div class="card margin-bottom-no">
-                    <div class="card-main">
-                        <div class="card-inner">
-                            <div class="card-inner">
-                                <div class="cardbtn-edit">
-                                    <div class="card-heading">用戶名修改</div>
-                                    <button class="btn btn-flat" id="username-update"><span class="icon">check</span>&nbsp;
-                                    </button>
-                                </div>
-                                <div class="form-group form-group-label">
-                                    <label class="floating-label" for="newusername">新用戶名</label>
-                                    <input class="form-control maxwidth-edit" id="newusername" type="text">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="card margin-bottom-no">
                     <div class="card-main">
                         <div class="card-inner">
@@ -205,20 +225,6 @@
                                     <label class="floating-label" for="repwd">确认新密码</label>
                                     <input class="form-control maxwidth-edit" id="repwd" type="password">
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card margin-bottom-no">
-                    <div class="card-main">
-                        <div class="card-inner">
-                            <div class="card-inner">
-                                <div class="cardbtn-edit">
-                                    <div class="card-heading">IP 解封</div>
-                                    <button class="btn btn-flat" id="unblock"><span class="icon">not_interested</span>&nbsp;
-                                    </button>
-                                </div>
-                                <p>当前状态：<code id="ajax-block">{$Block}</code></p>
                             </div>
                         </div>
                     </div>
@@ -300,7 +306,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card margin-bottom-no">
+                {* <div class="card margin-bottom-no">
                     <div class="card-main">
                         <div class="card-inner">
                             <div class="card-inner">
@@ -352,7 +358,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> *}
                 {if $config['port_price']>=0 || $config['port_price_specify']>=0}
                     <div class="card margin-bottom-no">
                         <div class="card-main">
@@ -426,7 +432,7 @@
                         </div>
                     </div>
                 {/if}
-                <div class="card margin-bottom-no">
+                {* <div class="card margin-bottom-no">
                     <div class="card-main">
                         <div class="card-inner">
                             <div class="card-inner">
@@ -452,7 +458,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> *}
             </div>
                 {include file='dialog.tpl'}
         </section>

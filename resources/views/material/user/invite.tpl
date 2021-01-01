@@ -51,7 +51,7 @@
                                                     点击复制
                                                 </button>
                                             </div>
-                                            <div class="invite-link">
+                                            {* <div class="invite-link">
                                                 <input type="text"
                                                        class="input form-control form-control-monospace cust-link"
                                                        name="input2" readonly=""
@@ -60,7 +60,7 @@
                                                         data-clipboard-text="{$config['baseUrl']}/#/auth/register?code={$code->code}">
                                                     点击复制
                                                 </button>
-                                            </div>
+                                            </div> *}
                                         </div>
                                     </div>
                                 </div>
