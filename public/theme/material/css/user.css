@@ -128,7 +128,7 @@ pre {
 }
 
 .node-icon {
-  color: #ff9000;
+  color: #35b0c5;
 }
 
 .node-alive {
@@ -359,4 +359,7 @@ a.btn-dl:visited {
     background: #444446;
     border: 1px solid #444446;
   }
+  .node-icon {
+  color: #5aa2e0;
+}
 }

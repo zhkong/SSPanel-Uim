@@ -10,8 +10,10 @@
     $().ready(function () {
         chart{$id} = new CanvasJS.Chart("load{$id}_chart",
                 {
+                    backgroundColor: "transparent",
                     title: {
-                        text: "节点负载情况 {$prefix}"
+                        text: "节点负载情况 {$prefix}",
+                        fontColor: "#78767F", 
                     },
                     data: [
                         {
@@ -38,14 +40,19 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         }
                     ]
                 });
+
+
         up_chart{$id} = new CanvasJS.Chart("up{$id}_chart",
                 {
+                    backgroundColor: "transparent",
                     title: {
-                        text: "最近一天节点在线情况 {$prefix} - 在线 {$point_node->getNodeUptime()}"
+                        text: "最近一天节点在线情况 {$prefix} - 在线 {$point_node->getNodeUptime()}",
+                        fontColor: "#78767F",
                     },
                     data: [
                         {
@@ -75,11 +82,14 @@
                         }
                     ]
                 });
+
         {$load=$point_node->getNodeAlive()}
         alive_chart{$id} = new CanvasJS.Chart("alive{$id}_chart",
                 {
+                    backgroundColor: "transparent",
                     title: {
-                        text: "最近一天节点在线人数情况 {$prefix}"
+                        text: "最近一天节点在线人数情况 {$prefix}",
+                        fontColor: "#78767F",
                     },
                     data: [
                         {
@@ -111,15 +121,21 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         }
                     ]
                 });
+
+
+
         {$speedtests=$point_node->getSpeedtestResult()}
         speedtest_chart{$id} = new CanvasJS.Chart("speedtest{$id}_chart",
                 {
+                    backgroundColor: "transparent",
                     title: {
-                        text: "最近节点测速延时情况报告 {$prefix}"
+                        text: "最近节点测速延时情况报告 {$prefix}",
+                        fontColor: "#78767F",
                     },
                     axisY: {
                         suffix: " ms"
@@ -156,6 +172,7 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         },
                         {
@@ -189,6 +206,7 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         },
                         {
@@ -222,14 +240,18 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         }
                     ]
                 });
+
         speedtest_ping_chart{$id} = new CanvasJS.Chart("speedtest{$id}_ping_chart",
                 {
+                    backgroundColor: "transparent",
                     title: {
-                        text: "最近节点测速速度情况报告 {$prefix}"
+                        text: "最近节点测速速度情况报告 {$prefix}",
+                        fontColor: "#78767F",
                     },
                     axisY: {
                         includeZero: false,
@@ -271,6 +293,7 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         },
                         {
@@ -305,6 +328,7 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         },
                         {
@@ -339,6 +363,7 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         },
                         {
@@ -373,6 +398,7 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         },
                         {
@@ -407,6 +433,7 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         },
                         {
@@ -441,14 +468,21 @@
                                 {/literal}
                                 {/if}
                                 {/foreach}
+
                             ]
                         }
                     ]
                 });
+
+
         chart{$id}.render();
         up_chart{$id}.render();
         alive_chart{$id}.render();
         speedtest_chart{$id}.render();
         speedtest_ping_chart{$id}.render();
+
+
     });
+
+
 </script>

@@ -97,7 +97,7 @@
 .auth-top {
 	justify-content: space-between;
 	align-items: flex-end;
-	background: #bbdefb;
+	background:#ffffff;
 	border-radius: 15px 15px 0 0;
 }
 
@@ -252,9 +252,9 @@ a.boardtop-left:hover {
 	.auth-col-one.auth-main {
 		width: 56%;
 	}
-	.auth-reg.auth-bottom {
+	/* .auth-reg.auth-bottom {
 		margin-top: 60px;
-	}
+	} */
 	
 	.rowtocol {
 		flex-basis: 48%;

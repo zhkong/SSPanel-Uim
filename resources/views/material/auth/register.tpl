@@ -5,15 +5,23 @@
         <section class="content-inner">
             <div class="auth-main auth-row">
                 <div class="auth-top auth-row">
-                    <a class="boardtop-left" href="/">
-                        <div>首 页</div>
-                    </a>
-                    <div class="auth-logo">
-                        <img src="/images/authlogo.jpg">
+
+                  <div class="card-header">
+                    <div class="card-inner">
+                      <!-- 这里可以取消掉注释换logo图。
+                      <h1 class="card-heading"><img src="/images/register.jpg" height=100% width=100% /></h1>
+                      -->
+                      <h1 class="card-heading">
+                        <div class="text" style=" text-align:center;">
+                          欢迎来到
+                        </div>
+                        <div class="text" style=" text-align:center;font-weight: bold;">
+                          {$config["appName"]}
+                        </div>
+                      </h1>
                     </div>
-                    <a href="/auth/login" class="boardtop-right">
-                        <div>登 录</div>
-                    </a>
+                  </div>
+                    
                 </div>
                 {if $config['register_mode']!='close'}
                     <div class="rowtocol">
@@ -136,6 +144,12 @@
                         <p>{$config['appName']} 已停止新用户注册，请联系网站管理员</p>
                     </div>
                 {/if}
+
+          <div class="auth-help auth-row">
+            <p class="margin-bottom-no pull-left"><a class="btn btn-flat btn-brand waves-attach"
+                href="/auth/login">已经注册？点我<b>登录</b></a></p>
+          </div>
+
                 <div class="auth-bottom auth-row auth-reg">
                     <div class="tgauth">
 

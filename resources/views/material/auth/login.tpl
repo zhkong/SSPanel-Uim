@@ -6,15 +6,14 @@
         <form action="javascript:void(0);" method="POST">
             <div class="auth-main auth-row auth-col-one">
                 <div class="auth-top auth-row">
-                    <a class="boardtop-left" href="/">
-                        <div>首 页</div>
-                    </a>
-                    <div class="auth-logo">
-                        <img src="/images/authlogo.jpg">
+
+                  <div class="card-header">
+                    <div class="card-inner">
+                      <h1 class="card-heading" style=" text-align:center;font-weight:bold;">
+                        登录</h1>
                     </div>
-                    <a href="/auth/register" class="boardtop-right">
-                        <div>注 册</div>
-                    </a>
+                  </div>
+
                 </div>
                 <div class="auth-row">
                     <div class="form-group-label auth-row row-login">
@@ -28,11 +27,12 @@
                         <input class="form-control maxwidth-auth" id="passwd" type="password" name="Password" autocomplete="current-password">
                     </div>
                 </div>
-                <div class="auth-row">
-                    <div class="form-group-label auth-row row-login">
-                        <label class="floating-label" for="code">两步验证码（未设置请忽略）</label>
-                        <input class="form-control maxwidth-auth" id="code" type="number" name="Code" inputmode="numeric" autocomplete="one-time-code">
-                    </div>
+                <div class="auth-row" style="visibility: hidden;position:absolute">
+                  <div class="form-group-label auth-row row-login">
+                    <label class="floating-label" for="code">两步验证码（未设置请忽略）</label>
+                    <input class="form-control maxwidth-auth" id="code" type="number" name="Code" inputmode="numeric"
+                      autocomplete="one-time-code">
+                  </div>
                 </div>
 
                 {if $geetest_html != null}
@@ -67,17 +67,11 @@
                         <a href="/password/reset">忘记密码？</a>
                     </div>
                 </div>
-                <div class="auth-bottom auth-row">
-                    <div class="tgauth">
-                        {if $config['enable_telegram'] === true}
-                            <span>Telegram</span>
-                            <button class="btn" id="calltgauth"><i class="icon icon-lg">near_me</i></button>
-                            <span>快捷登录</span>
-                        {else}
-                            <button class="btn" style="cursor:unset;"></button>
-                        {/if}
-                    </div>
-                </div>
+
+              <div class="auth-help auth-row">
+                <p class="margin-bottom-lg pull-left"><a class="btn btn-flat btn-brand waves-attach"
+                    href="/auth/register">还没帐号？点我<b>注册</b></a></p>
+              </div>
             </div>
         </form>
         {include file='./telegram_modal.tpl'}
