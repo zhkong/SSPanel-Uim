@@ -141,7 +141,7 @@
                                 <div class="card-tag tag-blue">{$shop->expire()} 天</div>
                                 {if {$shop->reset()} == '0' }
                                     <div class="card-tag tag-black">重置周期</div>
-                                    <div class="card-tag tag-blue">N/A</div>
+                                    <div class="card-tag tag-blue">不重置</div>
                                 {else}
                                     <div class="card-tag tag-black">重置周期</div>
                                     <div class="card-tag tag-blue">{$shop->reset_exp()} 天</div>

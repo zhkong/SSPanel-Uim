@@ -72,13 +72,13 @@ table tr td:first-child {
                                     </div>
                                 </div>
                                 <div class="nodemiddle node-flex">
-                                    <div style="font-size: 14px">账户有效时间：{substr($user->expire_in, 0, 10)}</div>
+                                    <div style="font-size: 14px">　</div>
                                 </div>
                             </div>
                         </div>
                         <div class="user-info-bottom">
                             <div class="nodeinfo node-flex">
-                                <span><i class="icon icon-md">attach_money</i>到期账户自动删除</span>
+                                <span>　</span>
                                 <a href="/user/code" class="card-tag tag-green">充值</a>
                             </div>
                         </div>
@@ -145,6 +145,7 @@ table tr td:first-child {
                     </div>
                 </div>
             </div>
+            {if $user->class!=0}
             <div class="ui-card-wrap">
                 <div class="col-xx-12 col-sm-5">
                     <div class="card">
@@ -921,6 +922,22 @@ table tr td:first-child {
                     </div>
                 </div>
             </div>
+            {/if}
+            {if $user->class==0}
+              <div class="col-xx-12 col-sm-12">
+                <div class="card quickadd">
+                    <div class="card-main">
+                      <div class="card-inner margin-bottom">
+                        <p class="card-heading"><i class="icon icon-md">phonelink</i>通知</p>
+                        <p class="card-heading" align="center">
+                          <strong>对不起，您不是VIP，无法使用节点。<br><a href="/user/shop">点击这里购买</a></strong>
+                        </p>
+                        <br>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            {/if}
             {include file='dialog.tpl'}
         </section>
     </div>

@@ -72,18 +72,22 @@
                         <li>
                             <a href="/user"><i class="icon icon-lg">account_balance_wallet</i>&nbsp;用户中心</a>
                         </li>
+                        {if $user->class!=0}
                         <li>
                             <a href="/user/node"><i class="icon icon-lg">airplanemode_active</i>&nbsp;节点列表</a>
                         </li>
+                        {/if}
                         <li>
                             <a href="/user/profile"><i class="icon icon-lg">account_box</i>&nbsp;账户信息</a>
                         </li>
                         <li>
                             <a href="/user/edit"><i class="icon icon-lg">sync_problem</i>&nbsp;资料编辑</a>
                         </li>
+                        {if $user->class!=0}
                         <li>
                             <a href="/user/invite"><i class="icon icon-lg">loyalty</i>&nbsp;邀请链接</a>
                         </li>
+                        {/if}
                     </ul>
                     <a class="waves-attach" data-toggle="collapse" href="#ui_menu_help">商店</a>
                     <ul class="menu-collapse collapse in" id="ui_menu_help">
@@ -121,9 +125,11 @@
                         </li>
                         -->
                     </ul>
+                    {if $user->class!=0}
                     <li>
                         <a href="{if $config['use_this_doc'] === false}/user/tutorial{else}/doc/{/if}"><i class="icon icon-lg">start</i>&nbsp;使用教程</a>
                     </li>
+                    {/if}
                     <!--
                     <a class="waves-attach" data-toggle="collapse" href="#ui_menu_detect">审计</a>
                     <ul class="menu-collapse collapse in" id="ui_menu_detect">
