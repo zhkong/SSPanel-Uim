@@ -273,10 +273,14 @@ class UserController extends BaseController
             $user->money += $codeq->number;
             $user->save();
 
-            if ($user->ref_by != '' && $user->ref_by != 0 && $user->ref_by != null) {
+            // if ($user->ref_by != '' && $user->ref_by != 0 && $user->ref_by != null) {
+            if ($user->ref_by != '' && $user->ref_by != 0 && $user->ref_by != null && $user->ref_count != 0) {
                 $gift_user = User::where('id', '=', $user->ref_by)->first();
                 $gift_user->money += ($codeq->number * ($_ENV['code_payback'] / 100));
                 $gift_user->save();
+
+                $user->ref_count -= 1;
+                $user->save();
 
                 $Payback = new Payback();
                 $Payback->total = $codeq->number;
