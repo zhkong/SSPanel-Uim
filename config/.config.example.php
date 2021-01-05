@@ -280,7 +280,7 @@ $_ENV['enable_checkin_captcha'] = false;        //启用签到验证码
 
 
 //支付系统设置----------------------------------------------------------------------------------------
-#取值 none | codepay | f2fpay | chenAlipay | paymentwall | spay | payjs | yftpay
+#取值 none | codepay | f2fpay | chenAlipay | paymentwall | spay | payjs | yftpay | mgate
 $_ENV['payment_system']       = 'none';
 
 #yft支付设置
