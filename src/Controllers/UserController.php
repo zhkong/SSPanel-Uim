@@ -882,14 +882,23 @@ class UserController extends BaseController
         $shop = Shop::where('id', $shop)->where('status', 1)->first();
 
         $orders = Bought::where('userid', $this->user->id)->get();
-        foreach ($orders as $order) {
-            if ($order->shop()->use_loop()) {
-                if ($order->valid()) {
-                    $res['ret'] = 0;
-                    $res['msg'] = '您购买的含有自动重置系统的套餐还未过期，无法购买新套餐';
-                    return $response->getBody()->write(json_encode($res));
-                }
-            }
+        //注释可以套餐到期前购买
+        // foreach ($orders as $order) {
+        //     if ($order->shop()->use_loop()) {
+        //         if ($order->valid()) {
+        //             $res['ret'] = 0;
+        //             $res['msg'] = '您购买的含有自动重置系统的套餐还未过期，无法购买新套餐';
+        //             return $response->getBody()->write(json_encode($res));
+        //         }
+        //     }
+        // };
+
+        //禁止跨等级购买
+        $user = $this->user;
+        if ($user->class > 0 && $user->class != $shop->content['class']){
+            $res['ret'] = 0;
+            $res['msg'] = '跨等级购买将会覆盖现在套餐！！！如需跨等级请发工单';
+            return $response->getBody()->write(json_encode($res));
         };
 
         if ($shop == null) {
