@@ -12,7 +12,7 @@
     <link href="/theme/material/css/project.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
     <!-- jquery -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1"></script>
+    <script src="/cache/npm/jquery@3.2.1"></script>
     <!-- favicon -->
     <!-- ... -->
     <style>
