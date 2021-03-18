@@ -945,7 +945,7 @@ table tr td:first-child {
 
 {include file='user/footer.tpl'}
 
-<script src="https://cdn.jsdelivr.net/npm/shake.js@1.2.2/shake.min.js"></script>
+<script src="/cache/npm/shake.js@1.2.2/shake.min.js"></script>
 <script>
     function DateParse(str_date) {
         var str_date_splited = str_date.split(/[^0-9]/);

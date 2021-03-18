@@ -429,7 +429,6 @@ document.getElementById('passwd').addEventListener('input', checkStrong);
     </script>
 {/if}
 
-{include file='./telegram.tpl'}
 
 {if $geetest_html != null}
     <script>

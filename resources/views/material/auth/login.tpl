@@ -166,7 +166,6 @@
     })
 </script>
 
-{include file='./telegram.tpl'}
 
 {if $geetest_html != null}
     <script>

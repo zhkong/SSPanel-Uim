@@ -1,7 +1,7 @@
 {include file='user/main.tpl'}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sukka/markdown.css">
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="stylesheet" href="/cache/npm/@sukka/markdown.css">
+<script src="/cache/npm/marked/marked.min.js"></script>
 
 <style>
 .tile-sub div {

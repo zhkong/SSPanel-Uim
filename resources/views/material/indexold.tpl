@@ -20,8 +20,8 @@
     <noscript>
         <link rel="stylesheet" href="/assets/css/noscript.css"/>
     </noscript>
-    <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <link href="/cache/npm/nprogress@0.2.0/nprogress.min.css" rel="stylesheet"/>
+    <script src="/cache/npm/nprogress@0.2.0/nprogress.min.js"></script>
 </head>
 
 <body>

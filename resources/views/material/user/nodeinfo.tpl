@@ -265,7 +265,7 @@
 
 {include file='user/footer.tpl'}
 
-<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js"></script>
+<script src="/cache/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js"></script>
 <script>
 	$(function(){
 		new ClipboardJS('.copy-text');
