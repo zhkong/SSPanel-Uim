@@ -12,7 +12,7 @@
     <link href="/theme/material/css/base.min.css" rel="stylesheet">
     <link href="/theme/material/css/project.min.css" rel="stylesheet">
     <link href="/theme/material/css/auth.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+    <link href="/cache/fonts/Material_Icons/font.css" rel="stylesheet">
     <style>
         .divcss5 {
             position: fixed;

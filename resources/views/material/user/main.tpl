@@ -9,7 +9,7 @@
     <!-- css -->
     <link href="/theme/material/css/base.min.css" rel="stylesheet">
     <link href="/theme/material/css/project.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+    <link href="/cache/fonts/Material_Icons/font.css" rel="stylesheet">
     <link rel="stylesheet" href="/theme/material/css/user.min.css">
     <!-- jquery -->
     <script src="/cache/npm/jquery@3.5.1"></script>

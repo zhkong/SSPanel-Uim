@@ -1,0 +1,16 @@
+@font-face {
+	font-family: 'Droid Sans Mono';
+	font-style: normal;
+	font-weight: normal;
+	src:
+		/* from https://fonts.gstatic.com/s/droidsansmono/v14/6NUO8FuJNQ2MbkrZ5-J8lKFrp7pRef2r.woff2 */
+		url('Droid_Sans_Mono.woff2') format('woff2'),
+		/* from https://fonts.gstatic.com/s/droidsansmono/v14/6NUO8FuJNQ2MbkrZ5-J8lKFrp7pRef2t.woff */
+		url('Droid_Sans_Mono.woff') format('woff'),
+		/* from https://fonts.gstatic.com/s/droidsansmono/v14/6NUO8FuJNQ2MbkrZ5-J8lKFrp7pRef2v.eot */
+		url('Droid_Sans_Mono.eot?#iefix') format('embedded-opentype'),
+		/* from https://fonts.gstatic.com/l/font?kit=6NUO8FuJNQ2MbkrZ5-J8lKFrp7pRef2s&skey=4f85afbb2287170b&v=v14#DroidSansMono */
+		url('Droid_Sans_Mono.svg#DroidSansMono') format('svg'),
+		/* from https://fonts.gstatic.com/s/droidsansmono/v14/6NUO8FuJNQ2MbkrZ5-J8lKFrp7pRef2u.ttf */
+		url('Droid_Sans_Mono.ttf') format('truetype');
+}
