@@ -1,6 +1,6 @@
 <script type="text/javascript"> window.$crisp = [];
     window.CRISP_WEBSITE_ID = "{$config["crisp_id"]}";
-    (function () {
+    (async function () {
         d = document;
         s = d.createElement("script");
         s.src = "https://client.crisp.chat/l.js";

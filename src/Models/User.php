@@ -50,7 +50,8 @@ class User extends Model
     public function getGravatarAttribute()
     {
         $hash = md5(strtolower(trim($this->attributes['email'])));
-        return 'https://cdn.v2ex.com/gravatar/' . $hash . "?&d=identicon";
+        return 'https://use.sevencdn.com/avatar/' . $hash . "?&d=identicon";
+        #更换头像cdn
     }
 
     public function isAdmin()
