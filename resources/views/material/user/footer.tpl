@@ -41,7 +41,6 @@
 <script src="/theme/material/js/project.min.js"></script>
 <script src="/cache/npm/clipboard@2.0.6"></script>
 <script src="/cache/npm/jquery-validation@1.19.2"></script>
-<script>console.table([['数据库查询', '执行时间'], ['{count($queryLog)} 次', '{$optTime} ms']])</script>
 
 </body>
 </html>
