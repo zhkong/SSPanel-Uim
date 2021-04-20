@@ -51,11 +51,6 @@ CREATE TABLE IF NOT EXISTS `login_ip` (
   `type`     int(11)      NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `radius_ban` (
-  `id`     int(11) NOT NULL,
-  `userid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 CREATE TABLE IF NOT EXISTS `speedtest` (
   `id`               bigint(20) NOT NULL,
   `nodeid`           int(11)    NOT NULL,
@@ -135,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user_name`           varchar(128)  NOT NULL,
   `email`               varchar(32)   NOT NULL,
   `pass`                varchar(256)  NOT NULL,
-  `passwd`              varchar(16)   NOT NULL,
+  `passwd`              varchar(256)   NOT NULL,
   `uuid`                varchar(146)  NOT NULL COMMENT 'UUID',
   `t`                   int(11)       NOT NULL DEFAULT '0',
   `u`                   bigint(20)    NOT NULL,
@@ -205,8 +200,6 @@ ALTER TABLE `link`
   ADD PRIMARY KEY (`id`);
 ALTER TABLE `login_ip`
   ADD PRIMARY KEY (`id`);
-ALTER TABLE `radius_ban`
-  ADD PRIMARY KEY (`id`);
 ALTER TABLE `speedtest`
   ADD PRIMARY KEY (`id`);
 ALTER TABLE `ss_invite_code`
@@ -243,8 +236,6 @@ ALTER TABLE `link`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `login_ip`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `radius_ban`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `speedtest`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `ss_invite_code`
@@ -370,29 +361,18 @@ CREATE TABLE IF NOT EXISTS `auto` (
 ) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE `auto`
-  ADD `sign` LONGTEXT NOT NULL AFTER `value`;ALTER TABLE `user` ADD `relay_enable` INT NOT NULL DEFAULT '0' AFTER `auto_reset_bandwidth`, ADD `relay_info` LONGTEXT NULL AFTER `relay_enable`;
+  ADD `sign` LONGTEXT NOT NULL AFTER `value`;
 ALTER TABLE `ss_node`
   ADD `custom_rss` INT NOT NULL DEFAULT '0' AFTER `node_group`;
 ALTER TABLE `user`
-  ADD `protocol` VARCHAR(128) NOT NULL DEFAULT 'origin' AFTER `relay_info`, ADD `protocol_param` VARCHAR(128) NULL DEFAULT NULL AFTER `protocol`, ADD `obfs` VARCHAR(128) NOT NULL DEFAULT 'plain' AFTER `protocol_param`, ADD `obfs_param` VARCHAR(128) NULL DEFAULT NULL AFTER `obfs`;
+  ADD `protocol` VARCHAR(128) NOT NULL DEFAULT 'origin' AFTER `node_group`, ADD `protocol_param` VARCHAR(128) NULL DEFAULT NULL AFTER `protocol`, ADD `obfs` VARCHAR(128) NOT NULL DEFAULT 'plain' AFTER `protocol_param`, ADD `obfs_param` VARCHAR(128) NULL DEFAULT NULL AFTER `obfs`;
 ALTER TABLE `user`
-  ADD `forbidden_ip` varchar(182) NULL DEFAULT '' AFTER `obfs_param`, ADD `forbidden_port` LONGTEXT NULL DEFAULT '' AFTER `forbidden_ip`, ADD `disconnect_ip` varchar(182) NULL DEFAULT '' AFTER `forbidden_port`;
-
-CREATE TABLE IF NOT EXISTS `disconnect_ip` (
-  `id`       BIGINT       NOT NULL AUTO_INCREMENT,
-  `userid`   BIGINT       NOT NULL,
-  `ip`       varchar(182) NOT NULL,
-  `datetime` BIGINT       NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  ADD `forbidden_ip` varchar(182) NULL DEFAULT '' AFTER `obfs_param`, ADD `forbidden_port` LONGTEXT NULL DEFAULT '' AFTER `forbidden_ip`;
 
 ALTER TABLE `user`
   CHANGE `node_speedlimit` `node_speedlimit` DECIMAL(12,2) NOT NULL DEFAULT '0.00';
 ALTER TABLE `ss_node`
   CHANGE `node_speedlimit` `node_speedlimit` DECIMAL(12,2) NOT NULL DEFAULT '0.00';
-ALTER TABLE `user`
-  DROP `relay_enable`,
-  DROP `relay_info`;
 ALTER TABLE `user`
   CHANGE `protocol` `protocol` VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'origin', CHANGE `obfs` `obfs` VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'plain';
 
@@ -406,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `email_verify` (
 ) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE `user`
-  ADD `is_hide` INT NOT NULL DEFAULT '0' AFTER `disconnect_ip`;
+  ADD `is_hide` INT NOT NULL DEFAULT '0' AFTER `obfs_param`;
 
 CREATE TABLE IF NOT EXISTS `detect_list` (
   `id`    BIGINT   NOT NULL AUTO_INCREMENT,
@@ -434,21 +414,6 @@ ALTER TABLE `ss_node`
   ADD `mu_only` INT NULL DEFAULT '0' AFTER `custom_rss`;
 ALTER TABLE `ss_node`
   ADD `online` BOOLEAN NOT NULL DEFAULT TRUE AFTER `mu_only`, ADD `gfw_block` BOOLEAN NOT NULL DEFAULT FALSE AFTER `online`;
-
-CREATE TABLE IF NOT EXISTS `relay` (
-  `id`             bigint(20)   NOT NULL,
-  `user_id`        bigint(20)   NOT NULL,
-  `source_node_id` bigint(20)   NOT NULL,
-  `dist_node_id`   bigint(20)   NOT NULL,
-  `dist_ip`        varchar(182) NOT NULL,
-  `port`           int(11)      NOT NULL,
-  `priority`       int(11)      NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-ALTER TABLE `relay`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `relay`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 CREATE TABLE IF NOT EXISTS `telegram_session` (
   `id`              BIGINT NOT NULL AUTO_INCREMENT,
@@ -529,26 +494,6 @@ CREATE TABLE IF NOT EXISTS `gconfig` (
   `last_update`    bigint(20)       NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='网站配置';
-
-
---
--- Telegram 任务列表
---
-CREATE TABLE IF NOT EXISTS `telegram_tasks` (
-  `id`           int(11) unsigned NOT     NULL AUTO_INCREMENT,
-  `type`         int(8)           NOT     NULL                COMMENT '任务类型',
-  `status`       int(2)           NOT     NULL DEFAULT '0'    COMMENT '任务状态',
-  `chatid`       varchar(128)     NOT     NULL DEFAULT '0'    COMMENT 'Telegram Chat ID',
-  `messageid`    varchar(128)     NOT     NULL DEFAULT '0'    COMMENT 'Telegram Message ID',
-  `content`      text             DEFAULT NULL                COMMENT '任务详细内容',
-  `process`      varchar(32)      DEFAULT NULL                COMMENT '临时任务进度',
-  `userid`       int(11)          NOT     NULL DEFAULT '0'    COMMENT '网站用户 ID',
-  `tguserid`     varchar(32)      NOT     NULL DEFAULT '0'    COMMENT 'Telegram User ID',
-  `executetime`  bigint(20)       NOT     NULL                COMMENT '任务执行时间',
-  `datetime`     bigint(20)       NOT     NULL                COMMENT '任务产生时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Telegram 任务列表';
-
 
 ALTER TABLE `detect_log`
   ADD `status` int(2) NOT NULL DEFAULT '0' AFTER `node_id`;

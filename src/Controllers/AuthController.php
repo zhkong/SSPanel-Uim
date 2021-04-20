@@ -13,7 +13,6 @@ use App\Utils\{
     Hash,
     Check,
     Tools,
-    Radius,
     Geetest,
     TelegramSessionManager
 };
@@ -47,7 +46,7 @@ class AuthController extends BaseController
             }
         }
 
-        if ($_ENV['enable_telegram'] === true) {
+        if ($_ENV['enable_telegram_login'] === true) {
             $login_text = TelegramSessionManager::add_login_session();
             $login = explode('|', $login_text);
             $login_token = $login[0];
@@ -236,7 +235,7 @@ class AuthController extends BaseController
             }
         }
 
-        if ($_ENV['enable_telegram'] === true) {
+        if ($_ENV['enable_telegram_login'] === true) {
             $login_text = TelegramSessionManager::add_login_session();
             $login = explode('|', $login_text);
             $login_token = $login[0];
@@ -377,7 +376,7 @@ class AuthController extends BaseController
         $user->user_name            = $antiXss->xss_clean($name);
         $user->email                = $email;
         $user->pass                 = Hash::passwordHash($passwd);
-        $user->passwd               = Tools::genRandomChar(6);
+        $user->passwd               = Tools::genRandomChar(16);
         $user->uuid                 = Uuid::uuid3(Uuid::NAMESPACE_DNS, $email . '|' . $current_timestamp);
         $user->port                 = Tools::getAvPort();
         $user->t                    = 0;
@@ -392,7 +391,8 @@ class AuthController extends BaseController
         $user->forbidden_port       = $_ENV['reg_forbidden_port'];
         $user->im_type              = $imtype;
         $user->im_value             = $antiXss->xss_clean($imvalue);
-        $user->transfer_enable      = Tools::toGB((int) Config::getconfig('Register.string.defaultTraffic'));
+        
+        $user->transfer_enable      = Tools::toGB(Config::getconfig('Register.string.defaultTraffic'));
         $user->invite_num           = (int) Config::getconfig('Register.string.defaultInviteNum');
         $user->auto_reset_day       = $_ENV['reg_auto_reset_day'];
         $user->auto_reset_bandwidth = $_ENV['reg_auto_reset_bandwidth'];
@@ -439,7 +439,6 @@ class AuthController extends BaseController
             $res['ret'] = 1;
             $res['msg'] = '注册成功！正在进入登录界面';
 
-            Radius::Add($user, $user->passwd);
             return $res;
         }
         $res['ret'] = 0;
@@ -455,20 +454,35 @@ class AuthController extends BaseController
             return $response->getBody()->write(json_encode($res));
         }
 
-        $name = $request->getParam('name');
-        $email = $request->getParam('email');
-        $email = trim($email);
-        $email = strtolower($email);
-        $passwd = $request->getParam('passwd');
-        $repasswd = $request->getParam('repasswd');
-        $code = trim($request->getParam('code'));
-        $imtype = $request->getParam('imtype');
+        $name      = $request->getParam('name');
+        $email     = $request->getParam('email');
+        $email     = trim($email);
+        $email     = strtolower($email);
+        $passwd    = $request->getParam('passwd');
+        $repasswd  = $request->getParam('repasswd');
+        $code      = trim($request->getParam('code'));
         $emailcode = $request->getParam('emailcode');
         $emailcode = trim($emailcode);
-
-        // 前端传入参数为wechat, 后续作为 im_value使用，变量改名为 im_value
-        $imvalue = $request->getParam('wechat');
-        $imvalue = trim($imvalue);
+        
+        if ($_ENV['enable_reg_im'] == true) {
+            $imtype  = $request->getParam('im_type');
+            $imvalue = $request->getParam('im_value');
+            if ($imtype == '' || $imvalue == '') {
+                $res['ret'] = 0;
+                $res['msg'] = '请填上你的联络方式';
+                return $response->getBody()->write(json_encode($res));
+            }
+    
+            $user = User::where('im_value', $imvalue)->where('im_type', $imtype)->first();
+            if ($user != null) {
+                $res['ret'] = 0;
+                $res['msg'] = '此联络方式已注册';
+                return $response->getBody()->write(json_encode($res));
+            }
+        } else {
+            $imtype  = 1;
+            $imvalue = '';
+        }
 
         if ($_ENV['enable_reg_captcha'] === true) {
             switch ($_ENV['captcha_provider']) {
@@ -528,22 +542,11 @@ class AuthController extends BaseController
             $res['msg'] = '两次密码输入不符';
             return $response->getBody()->write(json_encode($res));
         }
-
-        if ($imtype == '' || $imvalue == '') {
-            $res['ret'] = 0;
-            $res['msg'] = '请填上你的联络方式';
-            return $response->getBody()->write(json_encode($res));
-        }
-
-        $user = User::where('im_value', $imvalue)->where('im_type', $imtype)->first();
-        if ($user != null) {
-            $res['ret'] = 0;
-            $res['msg'] = '此联络方式已注册';
-            return $response->getBody()->write(json_encode($res));
-        }
+        
         if (Config::getconfig('Register.bool.Enable_email_verify')) {
             EmailVerify::where('email', '=', $email)->delete();
         }
+
         $res = $this->register_helper($name, $email, $passwd, $code, $imtype, $imvalue, 0);
         return $response->getBody()->write(json_encode($res));
     }
@@ -564,7 +567,7 @@ class AuthController extends BaseController
             return $response->getBody()->write(json_encode($res));
         }
 
-        if ($_ENV['enable_telegram'] === true) {
+        if ($_ENV['enable_telegram_login'] === true) {
             $ret = TelegramSessionManager::check_login_session($token, $number);
             $res['ret'] = $ret;
             return $response->getBody()->write(json_encode($res));
@@ -576,7 +579,7 @@ class AuthController extends BaseController
 
     public function telegram_oauth($request, $response, $args)
     {
-        if ($_ENV['enable_telegram'] === true) {
+        if ($_ENV['enable_telegram_login'] === true) {
             $auth_data = $request->getQueryParams();
             if ($this->telegram_oauth_check($auth_data) === true) { // Looks good, proceed.
                 $telegram_id = $auth_data['id'];

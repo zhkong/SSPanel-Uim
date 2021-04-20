@@ -12,7 +12,7 @@
     <link href="/cache/fonts/Material_Icons/font.css" rel="stylesheet">
     <link rel="stylesheet" href="/theme/material/css/user.min.css">
     <!-- jquery -->
-    <script src="/cache/npm/jquery@3.5.1"></script>
+    <script src="/cache/npm/jquery@3.6.0"></script>
     <script src="/cache/gh/davidshimjs/qrcodejs@master/qrcode.min.js"></script>
     <!-- js -->
     <script src="/assets/js/fuck.min.js"></script>

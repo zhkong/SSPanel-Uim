@@ -12,7 +12,7 @@
     <link href="/theme/material/css/project.min.css" rel="stylesheet">
     <link href="/cache/fonts/Material_Icons/font.css" rel="stylesheet">
     <!-- jquery -->
-    <script src="/cache/npm/jquery@3.2.1"></script>
+    <script src="/cache/npm/jquery@3.6.0"></script>
     <!-- favicon -->
     <!-- ... -->
     <style>

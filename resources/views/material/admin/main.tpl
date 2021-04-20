@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/material-design-lite@1.3.0/dist/material.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/DataTables/DataTables@1.10.19/media/css/dataTables.material.min.css" rel="stylesheet">
     <!-- js -->
-    <script src="/cache/npm/jquery@3.5.1"></script>
+    <script src="/cache/npm/jquery@3.6.0"></script>
     <!-- favicon -->
     <!-- ... -->
     <style>
@@ -101,7 +101,6 @@
                     <a class="waves-attach" data-toggle="collapse" href="#ui_menu_user">用户</a>
                     <ul class="menu-collapse collapse in" id="ui_menu_user">
                         <li><a href="/admin/user"><i class="icon icon-lg">supervisor_account</i>&nbsp;用户列表</a></li>
-                        <li><a href="/admin/relay"><i class="icon icon-lg">compare_arrows</i>&nbsp;中转规则</a></li>
                         <li><a href="/admin/invite"><i class="icon icon-lg">loyalty</i>&nbsp;邀请与返利</a></li>
                         <li><a href="/admin/subscribe"><i class="icon icon-lg">dialer_sip</i>&nbsp;订阅记录</a></li>
                         <li><a href="/admin/login"><i class="icon icon-lg">text_fields</i>&nbsp;登录记录</a></li>

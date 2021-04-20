@@ -6,9 +6,7 @@ use App\Services\{
     Auth,
     Mail,
     Config,
-    Payment,
-    BitPayment,
-    Gateway\ChenPay,
+    Payment
 };
 use App\Models\{
     Ip,
@@ -18,7 +16,6 @@ use App\Models\{
     Shop,
     User,
     Token,
-    Relay,
     Bought,
     Coupon,
     Ticket,
@@ -42,7 +39,6 @@ use App\Utils\{
     Check,
     QQWry,
     Tools,
-    Radius,
     Cookie,
     Geetest,
     Telegram,
@@ -130,14 +126,8 @@ class UserController extends BaseController
         return $this->view()
             ->assign('codes', $codes)
             ->assign('pmw', Payment::purchaseHTML())
-            ->assign('bitpay', BitPayment::purchaseHTML())
             ->assign('render', $render)
             ->display('user/code.tpl');
-    }
-
-    public function orderDelete($request, $response, $args)
-    {
-        return (new ChenPay())->orderDelete($request);
     }
 
     public function donate($request, $response, $args)
@@ -1209,7 +1199,7 @@ class UserController extends BaseController
     public function updateSsPwd($request, $response, $args)
     {
         $user = Auth::getUser();
-        $pwd = Tools::genRandomChar(6);
+        $pwd = Tools::genRandomChar(16);
         $current_timestamp = time();
         $new_uuid = Uuid::uuid3(Uuid::NAMESPACE_DNS, $user->email . '|' . $current_timestamp);
         $otheruuid = User::where('uuid', $new_uuid)->first();
@@ -1234,8 +1224,6 @@ class UserController extends BaseController
         $user->save();
         $user->updateSsPwd($pwd);
         $res['ret'] = 1;
-
-        Radius::Add($user, $pwd);
 
         return $this->echoJson($response, $res);
     }

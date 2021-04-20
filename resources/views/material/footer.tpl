@@ -41,7 +41,7 @@ It will not impact the appearance and can give developers a lot of support :)
 {/if}
 
 <!-- js -->
-<script src="/cache/npm/jquery@3.5.1"></script>
+<script src="/cache/npm/jquery@3.6.0"></script>
 {if isset($geetest_html)}
     <script src="//static.geetest.com/static/tools/gt.js"></script>
 {/if}

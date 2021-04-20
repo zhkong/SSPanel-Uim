@@ -49,14 +49,6 @@ return function (SlimApp $app) {
         $this->post('/buy',                     App\Controllers\UserController::class . ':buy');
         $this->post('/buy_traffic_package',     App\Controllers\UserController::class . ':buy_traffic_package');
 
-        // Relay Mange
-        $this->get('/relay',                    App\Controllers\User\RelayController::class . ':index');
-        $this->get('/relay/create',             App\Controllers\User\RelayController::class . ':create');
-        $this->post('/relay',                   App\Controllers\User\RelayController::class . ':add');
-        $this->get('/relay/{id}/edit',          App\Controllers\User\RelayController::class . ':edit');
-        $this->put('/relay/{id}',               App\Controllers\User\RelayController::class . ':update');
-        $this->delete('/relay',                 App\Controllers\User\RelayController::class . ':delete');
-
         $this->get('/ticket',                   App\Controllers\User\TicketController::class . ':ticket');
         $this->get('/ticket/create',            App\Controllers\User\TicketController::class . ':ticket_create');
         $this->post('/ticket',                  App\Controllers\User\TicketController::class . ':ticket_add');
@@ -117,9 +109,6 @@ return function (SlimApp $app) {
         $this->post('/payment/purchase',        App\Services\Payment::class . ':purchase');
         $this->get('/payment/return',           App\Services\Payment::class . ':returnHTML');
 
-        // Crypto Payment - BTC, ETH, EOS, BCH, LTC etch
-        $this->post('/payment/bitpay/purchase', App\Services\BitPayment::class . ':purchase');
-        $this->get('/payment/bitpay/return',    App\Services\BitPayment::class . ':returnHTML');
     })->add(new Auth());
 
     $app->group('/payment', function () {
@@ -127,9 +116,6 @@ return function (SlimApp $app) {
         $this->post('/notify',          App\Services\Payment::class . ':notify');
         $this->post('/notify/{type}',   App\Services\Payment::class . ':notify');
         $this->post('/status',          App\Services\Payment::class . ':getStatus');
-
-        $this->post('/bitpay/notify',   App\Services\BitPayment::class . ':notify');
-        $this->post('/bitpay/status',   App\Services\BitPayment::class . ':getStatus');
     });
 
     // Auth
@@ -176,16 +162,6 @@ return function (SlimApp $app) {
         $this->get('/ticket/{id}/view',         App\Controllers\Admin\TicketController::class . ':show');
         $this->put('/ticket/{id}',              App\Controllers\Admin\TicketController::class . ':update');
         $this->post('/ticket/ajax',             App\Controllers\Admin\TicketController::class . ':ajax');
-
-        // Relay Mange
-        $this->get('/relay',                    App\Controllers\Admin\RelayController::class . ':index');
-        $this->get('/relay/create',             App\Controllers\Admin\RelayController::class . ':create');
-        $this->post('/relay',                   App\Controllers\Admin\RelayController::class . ':add');
-        $this->get('/relay/{id}/edit',          App\Controllers\Admin\RelayController::class . ':edit');
-        $this->put('/relay/{id}',               App\Controllers\Admin\RelayController::class . ':update');
-        $this->delete('/relay',                 App\Controllers\Admin\RelayController::class . ':delete');
-        $this->get('/relay/path_search/{id}',   App\Controllers\Admin\RelayController::class . ':path_search');
-        $this->post('/relay/ajax',              App\Controllers\Admin\RelayController::class . ':ajax_relay');
 
         // Shop Mange
         $this->get('/shop',                     App\Controllers\Admin\ShopController::class . ':index');
@@ -329,13 +305,10 @@ return function (SlimApp $app) {
         $this->post('/nodes/config',        App\Controllers\Mod_Mu\NodeController::class . ':getConfig');
 
         $this->get('/func/detect_rules',    App\Controllers\Mod_Mu\FuncController::class . ':get_detect_logs');
-        $this->get('/func/relay_rules',     App\Controllers\Mod_Mu\FuncController::class . ':get_relay_rules');
         $this->post('/func/block_ip',       App\Controllers\Mod_Mu\FuncController::class . ':addBlockIp');
         $this->get('/func/block_ip',        App\Controllers\Mod_Mu\FuncController::class . ':get_blockip');
         $this->get('/func/unblock_ip',      App\Controllers\Mod_Mu\FuncController::class . ':get_unblockip');
         $this->post('/func/speedtest',      App\Controllers\Mod_Mu\FuncController::class . ':addSpeedtest');
-        $this->get('/func/autoexec',        App\Controllers\Mod_Mu\FuncController::class . ':get_autoexec');
-        $this->post('/func/autoexec',       App\Controllers\Mod_Mu\FuncController::class . ':addAutoexec');
 
         $this->get('/func/ping',            App\Controllers\Mod_Mu\FuncController::class . ':ping');
         //============================================
@@ -353,45 +326,6 @@ return function (SlimApp $app) {
     $app->group('/user', function () {
         $this->post('/doiam',           App\Services\Payment::class . ':purchase');
     })->add(new Auth());
-
-    $app->group('/doiam', function () {
-        $this->post('/callback/{type}', App\Services\Payment::class . ':notify');
-        $this->get('/return/alipay',    App\Services\Payment::class . ':returnHTML');
-        $this->post('/status',          App\Services\Payment::class . ':getStatus');
-    });
-
-    // Vue
-    $app->get('/logout',                App\Controllers\VueController::class . ':vuelogout');
-    $app->get('/globalconfig',          App\Controllers\VueController::class . ':getGlobalConfig');
-    $app->get('/getuserinfo',           App\Controllers\VueController::class . ':getUserInfo');
-    $app->post('/getuserinviteinfo',    App\Controllers\VueController::class . ':getUserInviteInfo');
-    $app->get('/getusershops',          App\Controllers\VueController::class . ':getUserShops');
-    $app->get('/getallresourse',        App\Controllers\VueController::class . ':getAllResourse');
-    $app->get('/getnewsubtoken',        App\Controllers\VueController::class . ':getNewSubToken');
-    $app->get('/getnewinvotecode',      App\Controllers\VueController::class . ':getNewInviteCode');
-    $app->get('/gettransfer',           App\Controllers\VueController::class . ':getTransfer');
-    $app->get('/getCaptcha',            App\Controllers\VueController::class . ':getCaptcha');
-    $app->post('/getChargeLog',         App\Controllers\VueController::class . ':getChargeLog');
-    $app->get('/getnodelist',           App\Controllers\VueController::class . ':getNodeList');
-    $app->get('/nodeinfo/{id}',         App\Controllers\VueController::class . ':getNodeInfo');
-    $app->get('/resettelegram',         App\Controllers\VueController::class . ':telegramReset');
-    $app->get('/getconnectsettings',         App\Controllers\VueController::class . ':getConnectSettings');
-
-    /**
-     * chenPay
-     */
-    $app->group('/user', function () {
-        $this->get('/chenPay',      App\Services\Payment::class . ':purchase');
-        $this->get('/orderDelete',  App\Controllers\UserController::class . ':orderDelete');
-    })->add(new Auth());
-    $app->group('/chenPay', function () {
-        $this->get('/status',       App\Services\Payment::class . ':getStatus');
-    });
-    $app->group('/admin', function () {
-        $this->get('/editConfig',   App\Controllers\AdminController::class . ':editConfig');
-        $this->post('/saveConfig',  App\Controllers\AdminController::class . ':saveConfig');
-    })->add(new Admin());
-    // chenPay end
 
     //doc
     $app->group('/doc', function () {
